@@ -39,7 +39,7 @@ class Auth extends Component {
       <div className="Auth">
         <form onSubmit={this.handleFormSubmit}>
         <input type="text" name="name" onChange={this.handleInputChange} placeholder="name" />
-        <input type="text" name="password" onChange={this.handleInputChange} placeholder="password" />
+        <input type="password" name="password" onChange={this.handleInputChange} placeholder="password" />
         <input type="submit" value="do some rails stuff!" />
       </form>
       </div>

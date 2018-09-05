@@ -13,5 +13,8 @@ class Services {
       }
     })
   };
+  logout(name) {
+    return fetch('/logout')
+  }
 }
 export default new Services();

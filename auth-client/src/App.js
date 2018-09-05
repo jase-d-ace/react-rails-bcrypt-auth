@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Auth from './components/Auth';
+import services from './services'
 
 class App extends Component {
   state = {
@@ -12,12 +13,27 @@ class App extends Component {
   constructor(props, context) {
     super(props, context);
     this.receiveUser = this.receiveUser.bind(this);
+    this.logout = this.logout.bind(this)
   }
 
   receiveUser(user) {
     this.setState({
       userDataLoaded: true,
       userData: user
+    })
+  }
+
+  logout() {
+    services.logout(this.state.userData.name)
+    .then(data => data.json())
+    .then( res => {
+      this.setState({
+        userDataLoaded: false,
+        userData: null
+      })
+    })
+    .catch( err => {
+      console.log('noo!', err)
     })
   }
 
@@ -32,6 +48,7 @@ class App extends Component {
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
         <h1>{this.state.userDataLoaded ? `Welcome, ${this.state.userData.name}` : 'Please Log In!' }</h1>
+        {this.state.userDataLoaded ? <button onClick={this.logout}>Log out!</button> : ''}
         <Auth receiveUser={this.receiveUser}/>
       </div>
     );
