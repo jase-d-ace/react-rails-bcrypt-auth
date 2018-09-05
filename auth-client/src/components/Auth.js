@@ -31,7 +31,8 @@ class Auth extends Component {
     .catch( err => {
       console.log('nooo', err)
     })
-    e.target.reset()
+    e.target.reset();
+    this.props.receiveUser(this.state);
   }
   render() {
     return (

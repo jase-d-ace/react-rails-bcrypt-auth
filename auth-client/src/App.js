@@ -4,6 +4,23 @@ import './App.css';
 import Auth from './components/Auth';
 
 class App extends Component {
+  state = {
+    userDataLoaded: false,
+    userData: null
+  }
+
+  constructor(props, context) {
+    super(props, context);
+    this.receiveUser = this.receiveUser.bind(this);
+  }
+
+  receiveUser(user) {
+    this.setState({
+      userDataLoaded: true,
+      userData: user
+    })
+  }
+
   render() {
     return (
       <div className="App">
@@ -14,7 +31,8 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
-        <Auth />
+        <h1>{this.state.userDataLoaded ? `Welcome, ${this.state.userData.name}` : 'Please Log In!' }</h1>
+        <Auth receiveUser={this.receiveUser}/>
       </div>
     );
   }
