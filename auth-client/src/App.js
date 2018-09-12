@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Auth from './components/Auth';
+import UpdateUser from './components/UpdateUser';
 import services from './services'
 
 class App extends Component {
@@ -50,6 +51,7 @@ class App extends Component {
         <h1>{this.state.userDataLoaded ? `Welcome, ${this.state.userData.name}` : 'Please Log In!' }</h1>
         {this.state.userDataLoaded ? <button onClick={this.logout}>Log out!</button> : ''}
         <Auth receiveUser={this.receiveUser}/>
+        {this.state.userDataLoaded ? <UpdateUser user={this.state.userData} /> : ''}
       </div>
     );
   }

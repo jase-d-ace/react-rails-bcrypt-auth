@@ -4,7 +4,8 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
       render json: {
-        user: user
+        id: user.id,
+        name: user.name
       }
     else
       render plain: "stuff happend wrong"

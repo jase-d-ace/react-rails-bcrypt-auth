@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import services from '../services';
 
-class Auth extends Component {
+export default class Auth extends Component {
   state = {
+    user: null,
     name: '',
-    password: ''
+    password: '',
+    userLoggedIn: false
   }
 
   constructor(props, context) {
@@ -26,13 +28,18 @@ class Auth extends Component {
     services.authenticate('/login', this.state)
     .then( res => res.json() )
     .then( data => {
-      console.log('data!', data)
+      console.log('data!', data);
+      this.setState({
+        user: data
+      }, () => {
+  let {userLoggedIn, user, ...rest} = this.state
+  this.props.receiveUser(user);
+      })
     })
     .catch( err => {
       console.log('nooo', err)
     })
     e.target.reset();
-    this.props.receiveUser(this.state);
   }
   render() {
     return (
@@ -47,4 +54,4 @@ class Auth extends Component {
   }
 }
 
-export default Auth;
+
