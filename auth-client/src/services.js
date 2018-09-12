@@ -17,14 +17,14 @@ class Services {
     return fetch('/logout')
   }
 
-  updateInformation(user) {
+  updateInformation(user, old, other) {
     return fetch(`/users/${user.id}`, {
       method: "PUT",
       mode: 'cors',
       body: JSON.stringify({
         name: user.name,
-        old_password: user.old_password,
-        password: user.password
+        old_password: old,
+        password: other
       }),
       headers: {
         'Accept': 'application/json',

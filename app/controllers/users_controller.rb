@@ -10,8 +10,9 @@ class UsersController < ApplicationController
   end
   def update
     @user = User.find_by(name: params[:name])
-    if is_password?(@user.password_digest, params[:old_password])
+    if @user.is_password?(@user.password_digest, params[:old_password])
       @user.password= params[:password]
+      @user.save!
       render json: {
         message: "coolcoolcool",
         user: @user
